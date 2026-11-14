@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Takaction — Apps nhỏ, chơi vui, dùng thật</title>
+<meta name="description" content="Takaction là studio indie làm app Android: giải Rubik bằng camera, toán cho bé, và game xả stress thời đồ đá.">
+<meta property="og:title" content="Takaction — Indie Android apps">
+<meta property="og:description" content="CubeSnap, Number Garden, Krog — ba app Android từ Takaction.">
+<meta property="og:image" content="https://play-lh.googleusercontent.com/lTiqbnicWCLmoQe8ysFGA5iKYje95dNi24FUyRQKBpumkAUPPanMRlsP-Hi38fJR5f1R8d-HChP2eJJidkR9i5g=s512">
+<meta name="theme-color" content="#14110f">
+<link rel="icon" href="https://play-lh.googleusercontent.com/lTiqbnicWCLmoQe8ysFGA5iKYje95dNi24FUyRQKBpumkAUPPanMRlsP-Hi38fJR5f1R8d-HChP2eJJidkR9i5g=s64">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbf8f3;
+    --surface: #ffffff;
+    --ink: #1b1613;
+    --muted: #6a5f57;
+    --line: #e9e1d6;
+    --accent: #ff5a1f;
+    --accent-ink: #ffffff;
+    --blue: #2f6bff;
+    --green: #1fa971;
+    --yellow: #ffc21a;
+    --shadow: 0 1px 2px rgba(27,22,19,.06), 0 12px 32px -12px rgba(27,22,19,.18);
+    --radius: 22px;
+    --font-head: "Bricolage Grotesque", ui-rounded, system-ui, sans-serif;
+    --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14110f; --surface: #1f1a17; --ink: #f6efe8; --muted: #b3a79d; --line: #332c27;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px -16px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14110f; --surface: #1f1a17; --ink: #f6efe8; --muted: #b3a79d; --line: #332c27;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px -16px rgba(0,0,0,.6);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+  h1, h2, h3 { font-family: var(--font-head); line-height: 1.08; letter-spacing: -0.02em; }
+
+  /* nav */
+  header { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px); background: color-mix(in srgb, var(--bg) 82%, transparent); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 12px; }
+  .logo { font-family: var(--font-head); font-weight: 800; font-size: 1.35rem; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+  .logo-mark { width: 26px; height: 26px; display: grid; grid-template: 1fr 1fr / 1fr 1fr; gap: 2px; transform: rotate(-8deg); }
+  .logo-mark i { border-radius: 5px; }
+  .logo-mark i:nth-child(1){background:var(--accent)} .logo-mark i:nth-child(2){background:var(--yellow)}
+  .logo-mark i:nth-child(3){background:var(--blue)} .logo-mark i:nth-child(4){background:var(--green)}
+  nav ul { display: flex; gap: 22px; list-style: none; padding: 0; }
+  nav a.link { text-decoration: none; color: var(--muted); font-weight: 500; font-size: .95rem; }
+  nav a.link:hover { color: var(--ink); }
+  .tools { display: flex; gap: 8px; }
+  .chip { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 6px 12px; font: 600 .82rem var(--font-body); cursor: pointer; min-height: 36px; }
+  .chip:hover { border-color: var(--accent); }
+  @media (max-width: 720px) { nav ul { display: none; } }
+
+  /* hero */
+  .hero { padding: clamp(48px, 9vw, 104px) 0 clamp(40px, 6vw, 72px); display: grid; gap: 48px; grid-template-columns: 1.15fr .85fr; align-items: center; }
+  .eyebrow { display: inline-flex; gap: 8px; align-items: center; font-weight: 600; font-size: .85rem; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); padding: 6px 12px; border-radius: 999px; }
+  .hero h1 { font-size: clamp(2.5rem, 6.4vw, 4.75rem); font-weight: 800; margin: 18px 0 18px; }
+  .hero h1 em { font-style: normal; background: linear-gradient(100deg, var(--accent), var(--yellow)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p.lead { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--muted); max-width: 52ch; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 14px; font-weight: 700; text-decoration: none; border: 1px solid transparent; min-height: 48px; transition: transform .15s, box-shadow .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 10px 24px -10px var(--accent); }
+  .btn.ghost { border-color: var(--line); background: var(--surface); }
+  .btn svg { width: 18px; height: 18px; }
+
+  .stack { position: relative; height: 340px; }
+  .stack .ic { position: absolute; width: 168px; height: 168px; border-radius: 38px; box-shadow: var(--shadow); border: 4px solid var(--surface); object-fit: cover; }
+  .stack .ic:nth-child(1) { left: 6%; top: 8%; transform: rotate(-9deg); }
+  .stack .ic:nth-child(2) { right: 4%; top: 0; transform: rotate(7deg); }
+  .stack .ic:nth-child(3) { left: 30%; bottom: 0; transform: rotate(-2deg); width: 188px; height: 188px; }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .stack { height: 280px; } .stack .ic { width: 130px; height: 130px; } .stack .ic:nth-child(3){ width:150px; height:150px; } }
+
+  /* stats */
+  .strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 24px; }
+  .strip div { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
+  .strip b { font: 800 1.9rem var(--font-head); display: block; }
+  .strip span { color: var(--muted); font-size: .92rem; }
+
+  section { padding: clamp(48px, 8vw, 88px) 0; }
+  .sec-head { max-width: 640px; margin-bottom: 40px; }
+  .sec-head h2 { font-size: clamp(1.9rem, 4.2vw, 3rem); font-weight: 800; margin-bottom: 12px; }
+  .sec-head p { color: var(--muted); font-size: 1.05rem; }
+
+  /* app cards */
+  .app { background: var(--surface); border: 1px solid var(--line); border-radius: 32px; padding: clamp(22px, 4vw, 44px); box-shadow: var(--shadow); margin-bottom: 28px; overflow: hidden; position: relative; }
+  .app::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 6px; background: var(--c); }
+  .app-top { display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: center; }
+  .app-top img.icon { width: 96px; height: 96px; border-radius: 24px; box-shadow: 0 8px 20px -8px rgba(0,0,0,.35); }
+  .tag { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--c); margin-bottom: 4px; }
+  .app h3 { font-size: clamp(1.5rem, 3.2vw, 2.2rem); font-weight: 800; }
+  .app .desc { color: var(--muted); margin-top: 6px; max-width: 60ch; }
+  .btn.play { background: var(--ink); color: var(--bg); white-space: nowrap; }
+  .feats { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 28px; margin: 28px 0 24px; }
+  .feats li { display: flex; gap: 10px; align-items: flex-start; font-size: .97rem; }
+  .feats li::before { content: ""; flex: none; width: 18px; height: 18px; margin-top: 4px; border-radius: 6px; background: var(--c); opacity: .9; clip-path: polygon(14% 52%, 0 66%, 38% 100%, 100% 22%, 84% 8%, 38% 70%); }
+  .app h3 small { font: 600 .9rem var(--font-body); color: var(--muted); letter-spacing: 0; margin-left: 6px; }
+  .badge { align-self: start; background: color-mix(in srgb, var(--c) 14%, transparent); color: var(--c); font-weight: 700; font-size: .85rem; padding: 8px 14px; border-radius: 999px; white-space: nowrap; border: 1px solid color-mix(in srgb, var(--c) 35%, transparent); }
+  .icon-ss { width: 96px; height: 96px; border-radius: 24px; display: grid; place-items: center; background: linear-gradient(135deg, #7a4dff, #4b2fd1); box-shadow: 0 8px 20px -8px rgba(0,0,0,.35); }
+  @media (max-width: 720px) { .icon-ss { width: 72px; height: 72px; border-radius: 18px; } .icon-ss svg { width: 38px; height: 38px; } .app-top .badge { grid-column: 1 / -1; justify-self: start; } }
+  .app-links { margin: 0 0 14px; font-size: .92rem; font-weight: 600; }
+  .app-links a { color: var(--muted); text-underline-offset: 3px; }
+  .app-links a:hover { color: var(--ink); }
+  footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
+  .shots { display: flex; gap: 14px; overflow-x: auto; padding: 4px 2px 14px; scroll-snap-type: x proximity; scrollbar-width: thin; }
+  .shots img { height: 420px; width: auto; border-radius: 18px; border: 1px solid var(--line); scroll-snap-align: start; flex: none; background: var(--bg); }
+  @media (max-width: 720px) {
+    .app-top { grid-template-columns: auto 1fr; }
+    .app-top .btn { grid-column: 1 / -1; justify-content: center; }
+    .app-top img.icon { width: 72px; height: 72px; border-radius: 18px; }
+    .shots img { height: 320px; }
+  }
+
+  /* about */
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .about .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+  .about .card h3 { font-size: 1.3rem; margin-bottom: 8px; }
+  .about .card p { color: var(--muted); }
+  .about .card.big { grid-column: 1 / -1; background: var(--ink); color: var(--bg); border: 0; }
+  .about .card.big p { color: color-mix(in srgb, var(--bg) 72%, transparent); max-width: 70ch; }
+  .about .card.big h3 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+  @media (max-width: 720px) { .about { grid-template-columns: 1fr; } .strip { grid-template-columns: 1fr; } }
+
+  .contact { text-align: center; background: linear-gradient(135deg, var(--accent), #ff8a3d); color: #fff; border-radius: 36px; padding: clamp(36px, 7vw, 72px) 24px; }
+  .contact h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 10px; }
+  .contact p { opacity: .92; max-width: 46ch; margin: 0 auto 24px; }
+  .contact .btn { background: #fff; color: #1b1613; }
+
+  footer { padding: 36px 0 48px; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); margin-top: 56px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } .btn:hover { transform: none; } }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Takaction</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a class="link" href="#apps" data-i18n="nav_apps">Ứng dụng</a></li>
+        <li><a class="link" href="#about" data-i18n="nav_about">Về Takaction</a></li>
+        <li><a class="link" href="#contact" data-i18n="nav_contact">Liên hệ</a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <button class="chip" id="lang" type="button" aria-label="Switch language">EN</button>
+      <button class="chip" id="theme" type="button" aria-label="Toggle theme">◐</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <span class="eyebrow" data-i18n="eyebrow">● Indie Android studio</span>
+      <h1 data-i18n-html="h1">Apps nhỏ, <em>chơi vui</em>, dùng thật.</h1>
+      <p class="lead" data-i18n="lead">Takaction làm những ứng dụng Android gọn nhẹ: giải Rubik bằng camera, học toán cùng bé, và xả stress theo kiểu người tiền sử.</p>
+      <div class="cta">
+        <a class="btn primary" href="#apps"><span data-i18n="cta_apps">Xem ứng dụng</span></a>
+        <a class="btn ghost" href="https://play.google.com/store/apps/dev?id=4733093585231168003" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19a1 1 0 0 0 1.5.86L21 12 5.5 1.64A1 1 0 0 0 4 2.5z"/></svg>
+          Google Play
+        </a>
+      </div>
+    </div>
+    <div class="stack" aria-hidden="true">
+      <img class="ic" alt="" src="https://play-lh.googleusercontent.com/lTiqbnicWCLmoQe8ysFGA5iKYje95dNi24FUyRQKBpumkAUPPanMRlsP-Hi38fJR5f1R8d-HChP2eJJidkR9i5g=s256">
+      <img class="ic" alt="" src="https://play-lh.googleusercontent.com/efFogaojQLZTU2l4gcl7fK_J6Oy2XItsgWCTWgjhVXs4RflQm3CX4ubGd8LuAC4BnmoQbB7SofJMRZ0SnJJd=s256">
+      <img class="ic" alt="" src="https://play-lh.googleusercontent.com/vMjdjoHlemN3kQSCp13_SDLQ7jFMx2CPdaeStYVXHySU-NFSlIuxtX2i_4VjFrzdVbjKvTjVy-yrIxrZKBv9=s256">
+    </div>
+  </div>
+
+  <div class="wrap strip reveal">
+    <div><b>3</b><span data-i18n="s1">ứng dụng trên Google Play</span></div>
+    <div><b data-i18n="s2v">3 lĩnh vực</b><span data-i18n="s2">Puzzle · Giáo dục trẻ em · Thư giãn</span></div>
+    <div><b data-i18n="s3v">VI + EN</b><span data-i18n="s3">Hỗ trợ song ngữ, ưu tiên trải nghiệm gọn nhẹ</span></div>
+  </div>
+
+  <section id="apps">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2 data-i18n="apps_h">Các dự án</h2>
+        <p data-i18n="apps_p">Mỗi app giải quyết một việc nhỏ và làm thật tới nơi tới chốn.</p>
+      </div>
+
+      <!-- CubeSnap -->
+      <article class="app reveal" style="--c: var(--accent)" id="cubesnap">
+        <div class="app-top">
+          <img class="icon" alt="CubeSnap icon" loading="lazy" src="https://play-lh.googleusercontent.com/lTiqbnicWCLmoQe8ysFGA5iKYje95dNi24FUyRQKBpumkAUPPanMRlsP-Hi38fJR5f1R8d-HChP2eJJidkR9i5g=s256">
+          <div>
+            <span class="tag" data-i18n="cube_tag">Puzzle · AI · 3D</span>
+            <h3>CubeSnap: Rubik Solver 3D</h3>
+            <p class="desc" data-i18n="cube_d">Quét khối Rubik trong vài giây và giải từng bước với hướng dẫn 3D cùng AI Coach.</p>
+          </div>
+          <a class="btn play" href="https://play.google.com/store/apps/details?id=com.takaction.cubesnap" target="_blank" rel="noopener" data-i18n="get">Tải trên Google Play</a>
+        </div>
+        <ul class="feats">
+          <li data-i18n="cube_f1">Quét khối bằng camera: chỉ cần xoay trước ống kính, CubeSnap tự đọc màu</li>
+          <li data-i18n="cube_f2">Kiểm tra và sửa tay từng ô màu trước khi giải</li>
+          <li data-i18n="cube_f3">Mũi tên 3D chỉ rõ từng nước đi, từng bước một</li>
+          <li data-i18n="cube_f4">Camera theo dõi và xác nhận mỗi nước bạn vừa xoay</li>
+          <li data-i18n="cube_f5">7 bài học Coach miễn phí, học theo từng lớp</li>
+          <li data-i18n="cube_f6">Chưa có khối trong tay? Thử một khối ngẫu nhiên</li>
+        </ul>
+        <p class="app-links"><a href="privacy/cubesnap/" data-i18n="policy">Chính sách quyền riêng tư</a></p>
+        <div class="shots" tabindex="0" aria-label="CubeSnap screenshots">
+          <img loading="lazy" alt="CubeSnap screenshot 1" src="https://play-lh.googleusercontent.com/5fd-IqP8coWWxR33mw7nA5cYTbe9Rz3SfRNTyH1tVNPcvvSPZ-xskkQ13hZVX7DjoOaHnrpIkT4OyYEbtfb8=h560">
+          <img loading="lazy" alt="CubeSnap screenshot 2" src="https://play-lh.googleusercontent.com/FOAI5XDGWz2QNkfS3mHhZ4GwxnCjRjKcJoTsk0m9ZjvrkNCIvx8TC4fwtf21k1xZ5qlmG68tD1gBDoW1zTVk=h560">
+          <img loading="lazy" alt="CubeSnap screenshot 3" src="https://play-lh.googleusercontent.com/H3046y_6U8K_duDCcLqhvJ5NdS9x8X_46P3_qyjwzBHEr8eLKa5FjJ_OVdHLiV17z79_M_750Gmi6k0FYLHYZQ=h560">
+        </div>
+      </article>
+
+      <!-- Number Garden -->
+      <article class="app reveal" style="--c: var(--green)" id="numbergarden">
+        <div class="app-top">
+          <img class="icon" alt="Number Garden icon" loading="lazy" src="https://play-lh.googleusercontent.com/efFogaojQLZTU2l4gcl7fK_J6Oy2XItsgWCTWgjhVXs4RflQm3CX4ubGd8LuAC4BnmoQbB7SofJMRZ0SnJJd=s256">
+          <div>
+            <span class="tag" data-i18n="ng_tag">Giáo dục · Trẻ em 5+</span>
+            <h3>Number Garden: Math for Kids</h3>
+            <p class="desc" data-i18n="ng_d">Đếm, cộng, trừ cho bé từ 5 tuổi qua các câu đố ô chữ toán học. Không quảng cáo.</p>
+          </div>
+          <a class="btn play" href="https://play.google.com/store/apps/details?id=com.leruyn.vuonso" target="_blank" rel="noopener" data-i18n="get">Tải trên Google Play</a>
+        </div>
+        <ul class="feats">
+          <li data-i18n="ng_f1">Đếm, cộng, trừ dành cho bé từ 5 tuổi</li>
+          <li data-i18n="ng_f2">Ô chữ toán học: học mà như chơi</li>
+          <li data-i18n="ng_f3">Hoàn toàn không quảng cáo</li>
+          <li data-i18n="ng_f4">Bài quiz lần đầu: bạn ong Buzzy dẫn bé tới đúng khu vườn</li>
+          <li data-i18n="ng_f5">Góc phụ huynh với bài “Show what you know” kiểm tra trình độ</li>
+        </ul>
+        <p class="app-links"><a href="privacy/number-garden/" data-i18n="policy">Chính sách quyền riêng tư</a></p>
+        <div class="shots" tabindex="0" aria-label="Number Garden screenshots">
+          <img loading="lazy" alt="Number Garden screenshot 1" src="https://play-lh.googleusercontent.com/2endaAnR732hZllnnr3ptLvpmJqMkbr-VcHnNaheC5vpPspOwAeXh9jY6UentEMyM4wP7C3XDMJi5rQvBMWX47U=h560">
+          <img loading="lazy" alt="Number Garden screenshot 2" src="https://play-lh.googleusercontent.com/9eY81SzFVm0Tw8pGZTGHqB3EKiBTGuM2DdKXtDPvockUPzvzoMdojigu8NVSY2sv5PR69Amh2aymthqNFCCg4A=h560">
+          <img loading="lazy" alt="Number Garden screenshot 3" src="https://play-lh.googleusercontent.com/Ezl4Vc5AXCtsZZQOY65AQETqKOyYmhbcf15VCmAxxhoXu8ouzZPANRzGhmzGUYBfSMrYXvrEzV-zPZOM_95H2A=h560">
+          <img loading="lazy" alt="Number Garden screenshot 4" src="https://play-lh.googleusercontent.com/LdzPy3hIEczKT-EimOwXVWeMRvrgK81YnBQJ6kGdoPm69dP7tkjfzwAThHe0YFCplWdW0XrteIN5080BALuS9w=h560">
+        </div>
+      </article>
+
+      <!-- Krog -->
+      <article class="app reveal" style="--c: var(--yellow)" id="krog">
+        <div class="app-top">
+          <img class="icon" alt="Krog icon" loading="lazy" src="https://play-lh.googleusercontent.com/vMjdjoHlemN3kQSCp13_SDLQ7jFMx2CPdaeStYVXHySU-NFSlIuxtX2i_4VjFrzdVbjKvTjVy-yrIxrZKBv9=s256">
+          <div>
+            <span class="tag" style="color:#b88400" data-i18n="kg_tag">Thư giãn · Xả stress</span>
+            <h3>Krog: Caveman Stress Relief</h3>
+            <p class="desc" data-i18n="kg_d">Đập đá, vẽ lên vách hang, đọc lời thông thái của người tiền sử. Stress tan chảy.</p>
+          </div>
+          <a class="btn play" href="https://play.google.com/store/apps/details?id=com.ruyn.krog" target="_blank" rel="noopener" data-i18n="get">Tải trên Google Play</a>
+        </div>
+        <ul class="feats">
+          <li data-i18n="kg_f1">Đập đá cho hả giận</li>
+          <li data-i18n="kg_f2">Vẽ tự do trên vách hang</li>
+          <li data-i18n="kg_f3">500+ câu nói thông thái của Krog</li>
+          <li data-i18n="kg_f4">Widget lời thông thái ngay màn hình chính Android</li>
+          <li data-i18n="kg_f5">Có tiếng Việt và tiếng Anh</li>
+        </ul>
+        <p class="app-links"><a href="privacy/krog/" data-i18n="policy">Chính sách quyền riêng tư</a></p>
+        <div class="shots" tabindex="0" aria-label="Krog screenshots">
+          <img loading="lazy" alt="Krog screenshot 1" src="https://play-lh.googleusercontent.com/7s4Ey0W8cH7515s21bGwOj5hcTZ2_68L0v-Tnjhxmptb5oJpvFgR6q6RFThHH6zK3ewjmUyHavQyrMZ8enQLMbk=h560">
+          <img loading="lazy" alt="Krog screenshot 2" src="https://play-lh.googleusercontent.com/X7K384pGOW-MfxGjt3jgx66VXcM-Jx9oKvR1fHg3hczD08V0hWGSRP8YNziqx5v4CMXRHKVPAMv0zrNP1VVJZg=h560">
+          <img loading="lazy" alt="Krog screenshot 3" src="https://play-lh.googleusercontent.com/YhMIDVbqqSC-6m2P_Q8B3CWrmxXXKj_2UygFnScJOAabnf-n9RfMUeN3XPHHLd6yPMeif41TgD-doPGNEPU_4cg=h560">
+        </div>
+      </article>
+
+      <!-- Little Passport (coming soon) -->
+      <article class="app soon reveal" style="--c: var(--blue)" id="hochieunhi">
+        <div class="app-top">
+          <img class="icon" alt="Hộ Chiếu Nhí icon" loading="lazy" src="assets/ho-chieu-nhi.png">
+          <div>
+            <span class="tag" data-i18n="hcn_tag">Giáo dục · Trẻ em 4–8</span>
+            <h3>Hộ Chiếu Nhí <small>Little Passport</small></h3>
+            <p class="desc" data-i18n="hcn_d">Bé bay vòng quanh thế giới để học địa lý: tô cờ, nhận món ăn, giải đố và sưu tập con dấu hộ chiếu.</p>
+          </div>
+          <span class="badge" data-i18n="soon">Sắp ra mắt</span>
+        </div>
+        <ul class="feats">
+          <li data-i18n="hcn_f1">Tô cờ, món ăn và đố vui về hàng trăm điểm đến</li>
+          <li data-i18n="hcn_f2">Sưu tập con dấu và chứng nhận trong cuốn hộ chiếu của bé</li>
+          <li data-i18n="hcn_f3">Khu phụ huynh: giới hạn giờ chơi, xem tiến độ</li>
+          <li data-i18n="hcn_f4">Chơi được cả khi không có mạng</li>
+          <li data-i18n="hcn_f5">Không thu thập thông tin cá nhân của bé</li>
+        </ul>
+        <p class="app-links"><a href="privacy/ho-chieu-nhi/" data-i18n="policy">Chính sách quyền riêng tư</a></p>
+      </article>
+
+      <!-- Smart Sight Assistant (coming soon) -->
+      <article class="app soon reveal" style="--c: #7a4dff" id="smartsight">
+        <div class="app-top">
+          <span class="icon icon-ss" aria-hidden="true">
+            <svg viewBox="0 0 48 48" width="52" height="52" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 24s7.5-13 21-13 21 13 21 13-7.5 13-21 13S3 24 3 24z"/><circle cx="24" cy="24" r="6.5"/></svg>
+          </span>
+          <div>
+            <span class="tag" data-i18n="ss_tag">Hỗ trợ thị lực · Người lớn tuổi</span>
+            <h3>Smart Sight Assistant</h3>
+            <p class="desc" data-i18n="ss_d">Quét nhãn sản phẩm để đọc to hạn dùng, hướng dẫn và chất gây dị ứng, dành cho người mắt kém.</p>
+          </div>
+          <span class="badge" data-i18n="soon">Sắp ra mắt</span>
+        </div>
+        <ul class="feats">
+          <li data-i18n="ss_f1">Quét nhãn bằng camera, nhận dạng chữ ngay trên điện thoại</li>
+          <li data-i18n="ss_f2">Đọc to hạn dùng, hướng dẫn sử dụng và thành phần</li>
+          <li data-i18n="ss_f3">Danh sách dị ứng cá nhân và cảnh báo rõ ràng</li>
+          <li data-i18n="ss_f4">Chữ lớn, độ tương phản cao, nút bấm to</li>
+          <li data-i18n="ss_f5">Ảnh không được lưu; ứng dụng không cần quyền Internet</li>
+        </ul>
+        <p class="app-links"><a href="privacy/smart-sight/" data-i18n="policy">Chính sách quyền riêng tư</a></p>
+      </article>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2 data-i18n="about_h">Về Takaction</h2>
+      </div>
+      <div class="about reveal">
+        <div class="card big">
+          <h3 data-i18n="about_big_h">Làm ít, làm kỹ, làm cho vui.</h3>
+          <p data-i18n="about_big_p">Takaction là studio indie phát triển ứng dụng Android bằng Kotlin. Mỗi sản phẩm bắt đầu từ một ý tưởng nhỏ, rồi được trau chuốt tới khi dùng mượt, nhẹ và dễ chịu.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="c1_h">Native Android</h3>
+          <p data-i18n="c1_p">Viết bằng Kotlin, tận dụng camera, widget và các tính năng sẵn có của hệ điều hành.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="c2_h">Tôn trọng người dùng</h3>
+          <p data-i18n="c2_p">Ứng dụng cho trẻ em không quảng cáo. Các app khác minh bạch về cách tính phí.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top:0">
+    <div class="wrap">
+      <div class="contact reveal">
+        <h2 data-i18n="ct_h">Thử một app hôm nay</h2>
+        <p data-i18n="ct_p">Toàn bộ ứng dụng của Takaction có trên Google Play. Cảm ơn bạn đã ghé thăm!</p>
+        <a class="btn" href="https://play.google.com/store/apps/dev?id=4733093585231168003" target="_blank" rel="noopener" data-i18n="ct_b">Xem trang nhà phát triển</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Takaction</span>
+    <nav aria-label="Privacy policies">
+      <a href="privacy/cubesnap/">CubeSnap <span data-i18n="policy_short">Quyền riêng tư</span></a>
+      <a href="privacy/number-garden/">Number Garden <span data-i18n="policy_short">Quyền riêng tư</span></a>
+      <a href="privacy/krog/">Krog <span data-i18n="policy_short">Quyền riêng tư</span></a>
+      <a href="privacy/ho-chieu-nhi/">Hộ Chiếu Nhí <span data-i18n="policy_short">Quyền riêng tư</span></a>
+      <a href="privacy/smart-sight/">Smart Sight <span data-i18n="policy_short">Quyền riêng tư</span></a>
+    </nav>
+    <span data-i18n="foot">Google Play là nhãn hiệu của Google LLC.</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var T = {
+    vi: {
+      nav_apps: "Ứng dụng", nav_about: "Về Takaction", nav_contact: "Liên hệ",
+      eyebrow: "● Indie Android studio",
+      h1: "Apps nhỏ, <em>chơi vui</em>, dùng thật.",
+      lead: "Takaction làm những ứng dụng Android gọn nhẹ: giải Rubik bằng camera, học toán cùng bé, và xả stress theo kiểu người tiền sử.",
+      cta_apps: "Xem ứng dụng",
+      s1: "ứng dụng đã lên Google Play, 2 ứng dụng sắp ra mắt", s2v: "4 lĩnh vực", s2: "Puzzle · Giáo dục trẻ em · Thư giãn · Hỗ trợ thị lực", s3v: "VI + EN", s3: "Hỗ trợ song ngữ, ưu tiên trải nghiệm gọn nhẹ",
+      apps_h: "Các dự án", apps_p: "Mỗi app giải quyết một việc nhỏ và làm thật tới nơi tới chốn.",
+      get: "Tải trên Google Play",
+      cube_tag: "Puzzle · AI · 3D", cube_d: "Quét khối Rubik trong vài giây và giải từng bước với hướng dẫn 3D cùng AI Coach.",
+      cube_f1: "Quét khối bằng camera: chỉ cần xoay trước ống kính, CubeSnap tự đọc màu",
+      cube_f2: "Kiểm tra và sửa tay từng ô màu trước khi giải",
+      cube_f3: "Mũi tên 3D chỉ rõ từng nước đi, từng bước một",
+      cube_f4: "Camera theo dõi và xác nhận mỗi nước bạn vừa xoay",
+      cube_f5: "7 bài học Coach miễn phí, học theo từng lớp",
+      cube_f6: "Chưa có khối trong tay? Thử một khối ngẫu nhiên",
+      ng_tag: "Giáo dục · Trẻ em 5+", ng_d: "Đếm, cộng, trừ cho bé từ 5 tuổi qua các câu đố ô chữ toán học. Không quảng cáo.",
+      ng_f1: "Đếm, cộng, trừ dành cho bé từ 5 tuổi", ng_f2: "Ô chữ toán học: học mà như chơi", ng_f3: "Hoàn toàn không quảng cáo",
+      ng_f4: "Bài quiz lần đầu: bạn ong Buzzy dẫn bé tới đúng khu vườn", ng_f5: "Góc phụ huynh với bài “Show what you know” kiểm tra trình độ",
+      kg_tag: "Thư giãn · Xả stress", kg_d: "Đập đá, vẽ lên vách hang, đọc lời thông thái của người tiền sử. Stress tan chảy.",
+      kg_f1: "Đập đá cho hả giận", kg_f2: "Vẽ tự do trên vách hang", kg_f3: "500+ câu nói thông thái của Krog",
+      kg_f4: "Widget lời thông thái ngay màn hình chính Android", kg_f5: "Có tiếng Việt và tiếng Anh",
+      about_h: "Về Takaction", about_big_h: "Làm ít, làm kỹ, làm cho vui.",
+      about_big_p: "Takaction là studio indie phát triển ứng dụng Android bằng Kotlin. Mỗi sản phẩm bắt đầu từ một ý tưởng nhỏ, rồi được trau chuốt tới khi dùng mượt, nhẹ và dễ chịu.",
+      c1_h: "Native Android", c1_p: "Viết bằng Kotlin, tận dụng camera, widget và các tính năng sẵn có của hệ điều hành.",
+      c2_h: "Tôn trọng người dùng", c2_p: "Ứng dụng cho trẻ em không quảng cáo. Các app khác minh bạch về cách tính phí.",
+      ct_h: "Thử một app hôm nay", ct_p: "Toàn bộ ứng dụng của Takaction có trên Google Play. Cảm ơn bạn đã ghé thăm!", ct_b: "Xem trang nhà phát triển",
+      policy: "Chính sách quyền riêng tư", policy_short: "Quyền riêng tư", soon: "Sắp ra mắt",
+      hcn_tag: "Giáo dục · Trẻ em 4–8", hcn_d: "Bé bay vòng quanh thế giới để học địa lý: tô cờ, nhận món ăn, giải đố và sưu tập con dấu hộ chiếu.",
+      hcn_f1: "Tô cờ, món ăn và đố vui về hàng trăm điểm đến", hcn_f2: "Sưu tập con dấu và chứng nhận trong cuốn hộ chiếu của bé",
+      hcn_f3: "Khu phụ huynh: giới hạn giờ chơi, xem tiến độ", hcn_f4: "Chơi được cả khi không có mạng", hcn_f5: "Không thu thập thông tin cá nhân của bé",
+      ss_tag: "Hỗ trợ thị lực · Người lớn tuổi", ss_d: "Quét nhãn sản phẩm để đọc to hạn dùng, hướng dẫn và chất gây dị ứng, dành cho người mắt kém.",
+      ss_f1: "Quét nhãn bằng camera, nhận dạng chữ ngay trên điện thoại", ss_f2: "Đọc to hạn dùng, hướng dẫn sử dụng và thành phần",
+      ss_f3: "Danh sách dị ứng cá nhân và cảnh báo rõ ràng", ss_f4: "Chữ lớn, độ tương phản cao, nút bấm to", ss_f5: "Ảnh không được lưu; ứng dụng không cần quyền Internet",
+      foot: "Google Play là nhãn hiệu của Google LLC."
+    },
+    en: {
+      nav_apps: "Apps", nav_about: "About", nav_contact: "Contact",
+      eyebrow: "● Indie Android studio",
+      h1: "Small apps, <em>big fun</em>, real use.",
+      lead: "Takaction builds lightweight Android apps: solve a Rubik's cube with your camera, learn math with your kid, and melt stress the caveman way.",
+      cta_apps: "See the apps",
+      s1: "apps live on Google Play, 2 more coming soon", s2v: "4 categories", s2: "Puzzle · Kids education · Relaxation · Vision support", s3v: "EN + VI", s3: "Bilingual, built to feel light and smooth",
+      apps_h: "Projects", apps_p: "Each app does one small thing and does it properly.",
+      get: "Get it on Google Play",
+      cube_tag: "Puzzle · AI · 3D", cube_d: "Scan a Rubik's cube in seconds and solve it step by step with 3D and AI Coach.",
+      cube_f1: "Scan with the camera: turn the cube in front of the lens and CubeSnap reads the colors",
+      cube_f2: "Check the colors and fix any tile by hand before solving",
+      cube_f3: "Follow 3D arrows that show every move, step by step",
+      cube_f4: "Camera tracking confirms each move as you make it",
+      cube_f5: "Learn layer by layer with 7 free Coach lessons",
+      cube_f6: "No cube at hand? Try a random one",
+      ng_tag: "Education · Kids 5+", ng_d: "Counting, adding & subtracting for ages 5+. Math crossword puzzles, no ads.",
+      ng_f1: "Counting, adding and subtracting for ages 5+", ng_f2: "Math crossword puzzles: learning that feels like play", ng_f3: "Completely ad-free",
+      ng_f4: "First-launch quiz: Buzzy the bee sends your child to the right garden", ng_f5: "Parent corner with a “Show what you know” quiz",
+      kg_tag: "Relaxation · Stress relief", kg_d: "Smash stones, draw on cave walls, read caveman wisdom. Melt stress away.",
+      kg_f1: "Smash stones to let it out", kg_f2: "Draw freely on cave walls", kg_f3: "500+ sayings of Krog wisdom",
+      kg_f4: "Wisdom widget for your Android home screen", kg_f5: "Available in English and Vietnamese",
+      about_h: "About Takaction", about_big_h: "Do less, do it well, make it fun.",
+      about_big_p: "Takaction is an indie studio building Android apps in Kotlin. Every product starts as a small idea and gets polished until it feels smooth, light and pleasant.",
+      c1_h: "Native Android", c1_p: "Written in Kotlin, using the camera, widgets and other features the OS already offers.",
+      c2_h: "Respect for users", c2_p: "No ads in the kids' app. Pricing in the other apps is spelled out clearly.",
+      ct_h: "Try an app today", ct_p: "All Takaction apps are on Google Play. Thanks for stopping by!", ct_b: "Visit developer page",
+      policy: "Privacy policy", policy_short: "Privacy", soon: "Coming soon",
+      hcn_tag: "Education · Kids 4–8", hcn_d: "Kids fly around the world learning geography: color flags, discover foods, solve quizzes and collect passport stamps.",
+      hcn_f1: "Flag coloring, foods and quizzes across hundreds of destinations", hcn_f2: "Collect stamps and certificates in your child’s own passport",
+      hcn_f3: "Parent area: play-time limit and progress report", hcn_f4: "Works offline", hcn_f5: "No personal information collected from the child",
+      ss_tag: "Vision support · Older adults", ss_d: "Scan a product label and hear the expiry date, directions and allergens read aloud, made for low vision.",
+      ss_f1: "Scan labels with the camera; text is recognized on the phone", ss_f2: "Reads expiry date, directions and ingredients aloud",
+      ss_f3: "Personal allergy list with clear alerts", ss_f4: "Large text, high contrast, big touch targets", ss_f5: "Photos are not saved; the app has no Internet permission",
+      foot: "Google Play is a trademark of Google LLC."
+    }
+  };
+
+  var root = document.documentElement;
+  function safe(fn) { try { return fn(); } catch (e) {} }
+
+  function setLang(l) {
+    root.lang = l;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { var v = T[l][el.dataset.i18n]; if (v) el.textContent = v; });
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) { var v = T[l][el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
+    document.getElementById("lang").textContent = l === "vi" ? "EN" : "VI";
+    document.title = l === "vi" ? "Takaction — Apps nhỏ, chơi vui, dùng thật" : "Takaction — Small apps, big fun";
+    safe(function () { localStorage.setItem("tk-lang", l); });
+  }
+  var lang = safe(function () { return localStorage.getItem("tk-lang"); }) || ((navigator.language || "vi").toLowerCase().indexOf("vi") === 0 ? "vi" : "en");
+  setLang(lang);
+  document.getElementById("lang").addEventListener("click", function () { setLang(root.lang === "vi" ? "en" : "vi"); });
+
+  var saved = safe(function () { return localStorage.getItem("tk-theme"); });
+  if (saved) root.dataset.theme = saved;
+  document.getElementById("theme").addEventListener("click", function () {
+    var dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    safe(function () { localStorage.setItem("tk-theme", root.dataset.theme); });
+  });
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  var els = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: .08 });
+    els.forEach(function (el) { io.observe(el); });
+  } else { els.forEach(function (el) { el.classList.add("in"); }); }
+})();
+</script>
+</body>
+</html>

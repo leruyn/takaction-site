@@ -1,0 +1,18 @@
+# app-ads.txt for Takaction
+#
+# Serve at the ROOT of the domain you set as "Website" on the Google Play
+# developer page / store listings:  https://YOUR-DOMAIN/app-ads.txt
+# One file covers every app from this developer.
+#
+# Format: <ad system domain>, <publisher ID>, <DIRECT|RESELLER>, <certification authority ID>
+
+# Google AdMob. Publisher ID taken from the AdMob unit IDs in each app's source
+# (ca-app-pub-5979918176742984/...). Apps that use it:
+#   - CubeSnap: Rubik Solver 3D   (com.takaction.cubesnap)  rewarded + banner
+#   - Little Passport / Hộ Chiếu Nhí (vn.hochieunhi.app)    interstitial + rewarded, child-directed
+google.com, pub-5979918176742984, DIRECT, f08c47fec0942fa0
+
+# Apps with no ads (nothing to list):
+#   - Number Garden: Math for Kids (com.leruyn.vuonso)
+#   - Krog: Caveman Stress Relief  (com.ruyn.krog)
+#   - Smart Sight Assistant        (com.takaction.smartsight)
