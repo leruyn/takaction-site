@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Takaction — Apps nhỏ, chơi vui, dùng thật</title>
-<meta name="description" content="Takaction là studio indie làm app Android: giải Rubik bằng camera, toán cho bé, và game xả stress thời đồ đá.">
-<meta property="og:title" content="Takaction — Indie Android apps">
-<meta property="og:description" content="CubeSnap, Number Garden, Krog — ba app Android từ Takaction.">
+<title>Takaction — Phát triển ứng dụng di động</title>
+<meta name="description" content="Takaction phát triển ứng dụng di động: CubeSnap, Number Garden, Krog và các ứng dụng sắp ra mắt. Hiện có trên Android, iOS trong kế hoạch.">
+<meta property="og:title" content="Takaction — Mobile app development">
+<meta property="og:description" content="CubeSnap, Number Garden, Krog: mobile apps from Takaction. Available on Android, iOS planned.">
 <meta property="og:image" content="https://play-lh.googleusercontent.com/lTiqbnicWCLmoQe8ysFGA5iKYje95dNi24FUyRQKBpumkAUPPanMRlsP-Hi38fJR5f1R8d-HChP2eJJidkR9i5g=s512">
 <meta name="theme-color" content="#14110f">
 <link rel="icon" href="https://play-lh.googleusercontent.com/lTiqbnicWCLmoQe8ysFGA5iKYje95dNi24FUyRQKBpumkAUPPanMRlsP-Hi38fJR5f1R8d-HChP2eJJidkR9i5g=s64">
@@ -138,6 +138,13 @@
   .contact h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 10px; }
   .contact p { opacity: .92; max-width: 46ch; margin: 0 auto 24px; }
   .contact .btn { background: #fff; color: #1b1613; }
+  .contact .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .contact .btn.outline { background: transparent; color: #fff; border-color: rgba(255,255,255,.7); }
+  .plats { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .plat { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-weight: 700; font-size: .9rem; }
+  .plat b { font-weight: 500; color: var(--muted); font-size: .82rem; }
+  .plat i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+  .plat.on i { background: var(--green); }
 
   footer { padding: 36px 0 48px; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); margin-top: 56px; }
   footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
@@ -170,15 +177,19 @@
 <main id="top">
   <div class="wrap hero">
     <div>
-      <span class="eyebrow" data-i18n="eyebrow">● Indie Android studio</span>
-      <h1 data-i18n-html="h1">Apps nhỏ, <em>chơi vui</em>, dùng thật.</h1>
-      <p class="lead" data-i18n="lead">Takaction làm những ứng dụng Android gọn nhẹ: giải Rubik bằng camera, học toán cùng bé, và xả stress theo kiểu người tiền sử.</p>
+      <span class="eyebrow" data-i18n="eyebrow">● Phát triển ứng dụng di động</span>
+      <h1 data-i18n-html="h1">Ứng dụng di động, <em>làm kỹ</em> từng chi tiết.</h1>
+      <p class="lead" data-i18n="lead">Takaction thiết kế và phát triển ứng dụng di động, từ công cụ hỗ trợ thị lực cho người lớn tuổi đến ứng dụng học tập cho trẻ em. Hiện có trên Android, iOS là bước tiếp theo.</p>
       <div class="cta">
         <a class="btn primary" href="#apps"><span data-i18n="cta_apps">Xem ứng dụng</span></a>
         <a class="btn ghost" href="https://play.google.com/store/apps/dev?id=4733093585231168003" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19a1 1 0 0 0 1.5.86L21 12 5.5 1.64A1 1 0 0 0 4 2.5z"/></svg>
           Google Play
         </a>
+      </div>
+      <div class="plats" role="list">
+        <span class="plat on" role="listitem"><i></i>Android <b data-i18n="plat_now">Đã phát hành</b></span>
+        <span class="plat" role="listitem"><i></i>iOS <b data-i18n="plat_next">Sắp tới</b></span>
       </div>
     </div>
     <div class="stack" aria-hidden="true">
@@ -191,14 +202,14 @@
   <div class="wrap strip reveal">
     <div><b>3</b><span data-i18n="s1">ứng dụng trên Google Play</span></div>
     <div><b data-i18n="s2v">3 lĩnh vực</b><span data-i18n="s2">Puzzle · Giáo dục trẻ em · Thư giãn</span></div>
-    <div><b data-i18n="s3v">VI + EN</b><span data-i18n="s3">Hỗ trợ song ngữ, ưu tiên trải nghiệm gọn nhẹ</span></div>
+    <div><b data-i18n="s3v">Android · iOS</b><span data-i18n="s3">Android đã phát hành, iOS trong kế hoạch</span></div>
   </div>
 
   <section id="apps">
     <div class="wrap">
       <div class="sec-head reveal">
         <h2 data-i18n="apps_h">Các dự án</h2>
-        <p data-i18n="apps_p">Mỗi app giải quyết một việc nhỏ và làm thật tới nơi tới chốn.</p>
+        <p data-i18n="apps_p">Mỗi ứng dụng giải quyết một vấn đề rõ ràng và được hoàn thiện đến nơi đến chốn.</p>
       </div>
 
       <!-- CubeSnap -->
@@ -334,16 +345,24 @@
       </div>
       <div class="about reveal">
         <div class="card big">
-          <h3 data-i18n="about_big_h">Làm ít, làm kỹ, làm cho vui.</h3>
-          <p data-i18n="about_big_p">Takaction là studio indie phát triển ứng dụng Android bằng Kotlin. Mỗi sản phẩm bắt đầu từ một ý tưởng nhỏ, rồi được trau chuốt tới khi dùng mượt, nhẹ và dễ chịu.</p>
+          <h3 data-i18n="about_big_h">Chuyên về ứng dụng di động.</h3>
+          <p data-i18n="about_big_p">Takaction phát triển ứng dụng di động từ ý tưởng đến phát hành: thiết kế trải nghiệm, lập trình, kiểm thử và vận hành trên cửa hàng ứng dụng. Mỗi sản phẩm hướng tới sự rõ ràng, mượt mà và tôn trọng người dùng.</p>
         </div>
         <div class="card">
-          <h3 data-i18n="c1_h">Native Android</h3>
-          <p data-i18n="c1_p">Viết bằng Kotlin, tận dụng camera, widget và các tính năng sẵn có của hệ điều hành.</p>
+          <h3 data-i18n="c1_h">Android trước, iOS tiếp theo</h3>
+          <p data-i18n="c1_p">Các ứng dụng hiện phát hành trên Google Play. Phiên bản iOS nằm trong kế hoạch phát triển ở giai đoạn sau.</p>
         </div>
         <div class="card">
-          <h3 data-i18n="c2_h">Tôn trọng người dùng</h3>
-          <p data-i18n="c2_p">Ứng dụng cho trẻ em không quảng cáo. Các app khác minh bạch về cách tính phí.</p>
+          <h3 data-i18n="c3_h">Công nghệ</h3>
+          <p data-i18n="c3_p">Kotlin, Kotlin Multiplatform, Jetpack Compose và React Native, chọn công cụ phù hợp với từng sản phẩm.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="c2_h">Minh bạch với người dùng</h3>
+          <p data-i18n="c2_p">Quảng cáo, dữ liệu thu thập và quyền truy cập được nêu rõ trong chính sách quyền riêng tư của từng ứng dụng.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="c4_h">Tập trung vào chất lượng</h3>
+          <p data-i18n="c4_p">Mỗi ứng dụng giải quyết một vấn đề cụ thể, ưu tiên sự dễ dùng và hiệu năng.</p>
         </div>
       </div>
     </div>
@@ -352,9 +371,12 @@
   <section id="contact" style="padding-top:0">
     <div class="wrap">
       <div class="contact reveal">
-        <h2 data-i18n="ct_h">Thử một app hôm nay</h2>
-        <p data-i18n="ct_p">Toàn bộ ứng dụng của Takaction có trên Google Play. Cảm ơn bạn đã ghé thăm!</p>
-        <a class="btn" href="https://play.google.com/store/apps/dev?id=4733093585231168003" target="_blank" rel="noopener" data-i18n="ct_b">Xem trang nhà phát triển</a>
+        <h2 data-i18n="ct_h">Trải nghiệm ứng dụng của Takaction</h2>
+        <p data-i18n="ct_p">Các ứng dụng hiện có trên Google Play. Cần hỗ trợ hoặc có góp ý? Hãy gửi email cho chúng tôi.</p>
+        <div class="actions">
+          <a class="btn" href="https://play.google.com/store/apps/dev?id=4733093585231168003" target="_blank" rel="noopener" data-i18n="ct_b">Xem trên Google Play</a>
+          <a class="btn outline" href="mailto:takcationsupport@gmail.com" data-i18n="ct_mail">Liên hệ qua email</a>
+        </div>
       </div>
     </div>
   </section>
@@ -379,12 +401,12 @@
   var T = {
     vi: {
       nav_apps: "Ứng dụng", nav_about: "Về Takaction", nav_contact: "Liên hệ",
-      eyebrow: "● Indie Android studio",
-      h1: "Apps nhỏ, <em>chơi vui</em>, dùng thật.",
-      lead: "Takaction làm những ứng dụng Android gọn nhẹ: giải Rubik bằng camera, học toán cùng bé, và xả stress theo kiểu người tiền sử.",
-      cta_apps: "Xem ứng dụng",
-      s1: "ứng dụng đã lên Google Play, 2 ứng dụng sắp ra mắt", s2v: "4 lĩnh vực", s2: "Puzzle · Giáo dục trẻ em · Thư giãn · Hỗ trợ thị lực", s3v: "VI + EN", s3: "Hỗ trợ song ngữ, ưu tiên trải nghiệm gọn nhẹ",
-      apps_h: "Các dự án", apps_p: "Mỗi app giải quyết một việc nhỏ và làm thật tới nơi tới chốn.",
+      eyebrow: "● Phát triển ứng dụng di động",
+      h1: "Ứng dụng di động, <em>làm kỹ</em> từng chi tiết.",
+      lead: "Takaction thiết kế và phát triển ứng dụng di động, từ công cụ hỗ trợ thị lực cho người lớn tuổi đến ứng dụng học tập cho trẻ em. Hiện có trên Android, iOS là bước tiếp theo.",
+      cta_apps: "Xem ứng dụng", plat_now: "Đã phát hành", plat_next: "Sắp tới",
+      s1: "ứng dụng đã lên Google Play, 2 ứng dụng sắp ra mắt", s2v: "4 lĩnh vực", s2: "Puzzle · Giáo dục trẻ em · Thư giãn · Hỗ trợ thị lực", s3v: "Android · iOS", s3: "Android đã phát hành, iOS trong kế hoạch",
+      apps_h: "Các dự án", apps_p: "Mỗi ứng dụng giải quyết một vấn đề rõ ràng và được hoàn thiện đến nơi đến chốn.",
       get: "Tải trên Google Play",
       cube_tag: "Puzzle · AI · 3D", cube_d: "Quét khối Rubik trong vài giây và giải từng bước với hướng dẫn 3D cùng AI Coach.",
       cube_f1: "Quét khối bằng camera: chỉ cần xoay trước ống kính, CubeSnap tự đọc màu",
@@ -399,11 +421,13 @@
       kg_tag: "Thư giãn · Xả stress", kg_d: "Đập đá, vẽ lên vách hang, đọc lời thông thái của người tiền sử. Stress tan chảy.",
       kg_f1: "Đập đá cho hả giận", kg_f2: "Vẽ tự do trên vách hang", kg_f3: "500+ câu nói thông thái của Krog",
       kg_f4: "Widget lời thông thái ngay màn hình chính Android", kg_f5: "Có tiếng Việt và tiếng Anh",
-      about_h: "Về Takaction", about_big_h: "Làm ít, làm kỹ, làm cho vui.",
-      about_big_p: "Takaction là studio indie phát triển ứng dụng Android bằng Kotlin. Mỗi sản phẩm bắt đầu từ một ý tưởng nhỏ, rồi được trau chuốt tới khi dùng mượt, nhẹ và dễ chịu.",
-      c1_h: "Native Android", c1_p: "Viết bằng Kotlin, tận dụng camera, widget và các tính năng sẵn có của hệ điều hành.",
-      c2_h: "Tôn trọng người dùng", c2_p: "Ứng dụng cho trẻ em không quảng cáo. Các app khác minh bạch về cách tính phí.",
-      ct_h: "Thử một app hôm nay", ct_p: "Toàn bộ ứng dụng của Takaction có trên Google Play. Cảm ơn bạn đã ghé thăm!", ct_b: "Xem trang nhà phát triển",
+      about_h: "Về Takaction", about_big_h: "Chuyên về ứng dụng di động.",
+      about_big_p: "Takaction phát triển ứng dụng di động từ ý tưởng đến phát hành: thiết kế trải nghiệm, lập trình, kiểm thử và vận hành trên cửa hàng ứng dụng. Mỗi sản phẩm hướng tới sự rõ ràng, mượt mà và tôn trọng người dùng.",
+      c1_h: "Android trước, iOS tiếp theo", c1_p: "Các ứng dụng hiện phát hành trên Google Play. Phiên bản iOS nằm trong kế hoạch phát triển ở giai đoạn sau.",
+      c3_h: "Công nghệ", c3_p: "Kotlin, Kotlin Multiplatform, Jetpack Compose và React Native, chọn công cụ phù hợp với từng sản phẩm.",
+      c2_h: "Minh bạch với người dùng", c2_p: "Quảng cáo, dữ liệu thu thập và quyền truy cập được nêu rõ trong chính sách quyền riêng tư của từng ứng dụng.",
+      c4_h: "Tập trung vào chất lượng", c4_p: "Mỗi ứng dụng giải quyết một vấn đề cụ thể, ưu tiên sự dễ dùng và hiệu năng.",
+      ct_h: "Trải nghiệm ứng dụng của Takaction", ct_p: "Các ứng dụng hiện có trên Google Play. Cần hỗ trợ hoặc có góp ý? Hãy gửi email cho chúng tôi.", ct_b: "Xem trên Google Play", ct_mail: "Liên hệ qua email",
       policy: "Chính sách quyền riêng tư", policy_short: "Quyền riêng tư", soon: "Sắp ra mắt",
       hcn_tag: "Giáo dục · Trẻ em 4–8", hcn_d: "Bé bay vòng quanh thế giới để học địa lý: tô cờ, nhận món ăn, giải đố và sưu tập con dấu hộ chiếu.",
       hcn_f1: "Tô cờ, món ăn và đố vui về hàng trăm điểm đến", hcn_f2: "Sưu tập con dấu và chứng nhận trong cuốn hộ chiếu của bé",
@@ -415,12 +439,12 @@
     },
     en: {
       nav_apps: "Apps", nav_about: "About", nav_contact: "Contact",
-      eyebrow: "● Indie Android studio",
-      h1: "Small apps, <em>big fun</em>, real use.",
-      lead: "Takaction builds lightweight Android apps: solve a Rubik's cube with your camera, learn math with your kid, and melt stress the caveman way.",
-      cta_apps: "See the apps",
-      s1: "apps live on Google Play, 2 more coming soon", s2v: "4 categories", s2: "Puzzle · Kids education · Relaxation · Vision support", s3v: "EN + VI", s3: "Bilingual, built to feel light and smooth",
-      apps_h: "Projects", apps_p: "Each app does one small thing and does it properly.",
+      eyebrow: "● Mobile app development",
+      h1: "Mobile apps, <em>crafted</em> with care.",
+      lead: "Takaction designs and builds mobile apps, from vision tools for older adults to learning apps for kids. Available on Android today, with iOS next.",
+      cta_apps: "See the apps", plat_now: "Available", plat_next: "Coming next",
+      s1: "apps live on Google Play, 2 more coming soon", s2v: "4 categories", s2: "Puzzle · Kids education · Relaxation · Vision support", s3v: "Android · iOS", s3: "Android released, iOS planned",
+      apps_h: "Projects", apps_p: "Each app solves one clear problem and is finished properly.",
       get: "Get it on Google Play",
       cube_tag: "Puzzle · AI · 3D", cube_d: "Scan a Rubik's cube in seconds and solve it step by step with 3D and AI Coach.",
       cube_f1: "Scan with the camera: turn the cube in front of the lens and CubeSnap reads the colors",
@@ -435,11 +459,13 @@
       kg_tag: "Relaxation · Stress relief", kg_d: "Smash stones, draw on cave walls, read caveman wisdom. Melt stress away.",
       kg_f1: "Smash stones to let it out", kg_f2: "Draw freely on cave walls", kg_f3: "500+ sayings of Krog wisdom",
       kg_f4: "Wisdom widget for your Android home screen", kg_f5: "Available in English and Vietnamese",
-      about_h: "About Takaction", about_big_h: "Do less, do it well, make it fun.",
-      about_big_p: "Takaction is an indie studio building Android apps in Kotlin. Every product starts as a small idea and gets polished until it feels smooth, light and pleasant.",
-      c1_h: "Native Android", c1_p: "Written in Kotlin, using the camera, widgets and other features the OS already offers.",
-      c2_h: "Respect for users", c2_p: "No ads in the kids' app. Pricing in the other apps is spelled out clearly.",
-      ct_h: "Try an app today", ct_p: "All Takaction apps are on Google Play. Thanks for stopping by!", ct_b: "Visit developer page",
+      about_h: "About Takaction", about_big_h: "Focused on mobile apps.",
+      about_big_p: "Takaction builds mobile apps from idea to release: experience design, engineering, testing and store operations. Every product aims to be clear, smooth and respectful of its users.",
+      c1_h: "Android first, iOS next", c1_p: "The apps are released on Google Play today. iOS versions are planned for a later phase.",
+      c3_h: "Technology", c3_p: "Kotlin, Kotlin Multiplatform, Jetpack Compose and React Native, chosen to fit each product.",
+      c2_h: "Transparent with users", c2_p: "Ads, data collection and permissions are spelled out in each app's privacy policy.",
+      c4_h: "Quality focus", c4_p: "Each app solves a specific problem, with ease of use and performance as priorities.",
+      ct_h: "Try Takaction's apps", ct_p: "The apps are available on Google Play. Need support or have feedback? Send us an email.", ct_b: "View on Google Play", ct_mail: "Email us",
       policy: "Privacy policy", policy_short: "Privacy", soon: "Coming soon",
       hcn_tag: "Education · Kids 4–8", hcn_d: "Kids fly around the world learning geography: color flags, discover foods, solve quizzes and collect passport stamps.",
       hcn_f1: "Flag coloring, foods and quizzes across hundreds of destinations", hcn_f2: "Collect stamps and certificates in your child’s own passport",
@@ -459,7 +485,7 @@
     document.querySelectorAll("[data-i18n]").forEach(function (el) { var v = T[l][el.dataset.i18n]; if (v) el.textContent = v; });
     document.querySelectorAll("[data-i18n-html]").forEach(function (el) { var v = T[l][el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
     document.getElementById("lang").textContent = l === "vi" ? "EN" : "VI";
-    document.title = l === "vi" ? "Takaction — Apps nhỏ, chơi vui, dùng thật" : "Takaction — Small apps, big fun";
+    document.title = l === "vi" ? "Takaction — Phát triển ứng dụng di động" : "Takaction — Mobile app development";
     safe(function () { localStorage.setItem("tk-lang", l); });
   }
   var lang = safe(function () { return localStorage.getItem("tk-lang"); }) || ((navigator.language || "vi").toLowerCase().indexOf("vi") === 0 ? "vi" : "en");
