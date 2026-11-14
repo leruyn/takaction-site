@@ -1,0 +1,49 @@
+# Netlify config for the Takaction static site.
+# No build step: the repo root is the site. Pretty URLs are on by default,
+# so /privacy/cubesnap/ serves privacy/cubesnap/index.html.
+
+[build]
+  publish = "."
+  # Intentionally no build command. Policy pages are generated locally with
+  # `python3 tools/build-policies.py` and committed.
+
+# Keep dev-only files out of the public site.
+[[redirects]]
+  from = "/tools/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Security headers for every page.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+    # The site uses inline <style>/<script>, Google Fonts and Google Play CDN images.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://play-lh.googleusercontent.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+
+# app-ads.txt must be plain text at the domain root. Google's crawler re-reads it, so keep the cache short.
+[[headers]]
+  for = "/app-ads.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/privacy/policy.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
