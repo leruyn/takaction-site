@@ -327,6 +327,7 @@ def page(slug, app):
 <title>{e(app["name"])} — Privacy Policy</title>
 <meta name="description" content="Privacy policy for {e(app["name"])} by {DEVELOPER}.">
 <meta name="robots" content="index,follow">
+<link rel="icon" type="image/png" href="../../assets/logo-64.png">
 <link rel="stylesheet" href="../policy.css">
 </head>
 <body>

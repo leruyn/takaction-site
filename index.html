@@ -7,9 +7,10 @@
 <meta name="description" content="Takaction phát triển ứng dụng di động: CubeSnap, Number Garden, Krog và các ứng dụng sắp ra mắt. Hiện có trên Android, iOS trong kế hoạch.">
 <meta property="og:title" content="Takaction — Mobile app development">
 <meta property="og:description" content="CubeSnap, Number Garden, Krog: mobile apps from Takaction. Available on Android, iOS planned.">
-<meta property="og:image" content="https://play-lh.googleusercontent.com/lTiqbnicWCLmoQe8ysFGA5iKYje95dNi24FUyRQKBpumkAUPPanMRlsP-Hi38fJR5f1R8d-HChP2eJJidkR9i5g=s512">
-<meta name="theme-color" content="#14110f">
-<link rel="icon" href="https://play-lh.googleusercontent.com/lTiqbnicWCLmoQe8ysFGA5iKYje95dNi24FUyRQKBpumkAUPPanMRlsP-Hi38fJR5f1R8d-HChP2eJJidkR9i5g=s64">
+<meta property="og:image" content="https://play-lh.googleusercontent.com/OvPdxmJCWSexl_tgQmnTSdyYLT9wTX6oHIbKTadTt9m3tWle9iJzQ1WpBR8guaLyL7EN=s512">
+<meta name="theme-color" content="#0f1b2d">
+<link rel="icon" type="image/png" href="assets/logo-64.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
@@ -52,10 +53,7 @@
   header { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px); background: color-mix(in srgb, var(--bg) 82%, transparent); border-bottom: 1px solid var(--line); }
   .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 12px; }
   .logo { font-family: var(--font-head); font-weight: 800; font-size: 1.35rem; text-decoration: none; display: flex; align-items: center; gap: 10px; }
-  .logo-mark { width: 26px; height: 26px; display: grid; grid-template: 1fr 1fr / 1fr 1fr; gap: 2px; transform: rotate(-8deg); }
-  .logo-mark i { border-radius: 5px; }
-  .logo-mark i:nth-child(1){background:var(--accent)} .logo-mark i:nth-child(2){background:var(--yellow)}
-  .logo-mark i:nth-child(3){background:var(--blue)} .logo-mark i:nth-child(4){background:var(--green)}
+  .logo-mark { width: 34px; height: 34px; border-radius: 9px; flex: none; }
   nav ul { display: flex; gap: 22px; list-style: none; padding: 0; }
   nav a.link { text-decoration: none; color: var(--muted); font-weight: 500; font-size: .95rem; }
   nav a.link:hover { color: var(--ink); }
@@ -159,7 +157,7 @@
 
 <header>
   <div class="wrap nav">
-    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Takaction</a>
+    <a class="logo" href="#top"><img class="logo-mark" src="assets/logo-64.png" alt="" width="34" height="34">Takaction</a>
     <nav aria-label="Main">
       <ul>
         <li><a class="link" href="#apps" data-i18n="nav_apps">Ứng dụng</a></li>
